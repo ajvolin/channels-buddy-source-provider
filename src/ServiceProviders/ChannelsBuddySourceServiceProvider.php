@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 class ChannelsBuddySourceServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register the ChannelSourceProviders singleton
      *
      * @return void
      */
@@ -17,15 +17,5 @@ class ChannelsBuddySourceServiceProvider extends ServiceProvider
         $this->app->singleton(ChannelSourceProviders::class, function($app) {
             return new ChannelSourceProviders;
         });
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
     }
 }
