@@ -24,7 +24,7 @@ class ChannelSourceProviders
     public function registerChannelSourceProvider(string $sourceProviderName,
         ChannelSourceProvider $channelSource): void
     {
-        if (!in_array($sourceProviderName, $this->channelSourceProviders)) {
+        if (!array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
             $this->channelSourceProviders[$sourceProviderName] = $channelSource;
         } else {
             throw new ChannelSourceProviderException(
@@ -42,7 +42,7 @@ class ChannelSourceProviders
     public function getChannelSourceProvider(
         string $sourceProviderName): ChannelSourceProvider
     {
-        if (in_array($sourceProviderName, $this->channelSourceProviders)) {
+        if (array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
             return $this->channelSourceProviders[$sourceProviderName];
         } else {
             throw new ChannelSourceProviderException(
