@@ -1,0 +1,41 @@
+{
+    "name": "ajvolin/channels-buddy-source-provider",
+    "description": "A package for implementing channel sources for Channels Buddy",
+    "keywords": [
+        "Channels",
+        "Channels Buddy"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adam Volin",
+            "email": "trome.auay@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-xmlwriter": "*",
+        "ajvolin/xmltv": "^3.0.3",
+        "guzzlehttp/guzzle": "^7.2",
+        "halaxa/json-machine": "^0.5.0",
+        "illuminate/support": "^8.0",
+        "nesbot/carbon": "^2.40.0",
+        "ramsey/uuid": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "ChannelsBuddy\\SourceProvider\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ChannelsBuddy\\SourceProvider\\ServiceProviders\\ChannelsBuddySourceServiceProvider"
+            ]
+        }
+    },
+    "prefer-stable": true
+}
