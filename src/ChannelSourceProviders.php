@@ -24,12 +24,16 @@ class ChannelSourceProviders
     public function registerChannelSourceProvider(string $sourceProviderName,
         ChannelSourceProvider $channelSource): void
     {
-        if (!array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
-            $this->channelSourceProviders[$sourceProviderName] = $channelSource;
-        } else {
-            throw new ChannelSourceProviderException(
-                "Channel source with name {$sourceProviderName} already exists."
-            );
+        try {
+            if (!array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
+                $this->channelSourceProviders[$sourceProviderName] = $channelSource;
+            } else {
+                throw new ChannelSourceProviderException(
+                    "Channel source with name {$sourceProviderName} already exists."
+                );
+            }
+        } catch (ChannelSourceProviderException $e) {
+            report($e);
         }
     }
 
@@ -42,12 +46,16 @@ class ChannelSourceProviders
     public function getChannelSourceProvider(
         string $sourceProviderName): ChannelSourceProvider
     {
-        if (array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
-            return $this->channelSourceProviders[$sourceProviderName];
-        } else {
-            throw new ChannelSourceProviderException(
-                "Channel source with name {$sourceProviderName} does not exist."
-            );
+        try {
+            if (array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
+                return $this->channelSourceProviders[$sourceProviderName];
+            } else {
+                throw new ChannelSourceProviderException(
+                    "Channel source with name {$sourceProviderName} does not exist."
+                );
+            }
+        } catch (ChannelSourceProviderException $e) {
+            report($e);
         }
     }
     
