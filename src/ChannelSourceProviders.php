@@ -17,19 +17,18 @@ class ChannelSourceProviders
     /**
      * Registers a channel source provider
      *
-     * @param string $sourceProviderName
      * @param ChannelSourceProvider $channelSource
      * @return void
      */
-    public function registerChannelSourceProvider(string $sourceProviderName,
+    public function registerChannelSourceProvider(
         ChannelSourceProvider $channelSource): void
     {
         try {
-            if (!array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
-                $this->channelSourceProviders[$sourceProviderName] = $channelSource;
+            if (!array_key_exists($channelSource->getSourceName(), $this->channelSourceProviders)) {
+                $this->channelSourceProviders[$channelSource->getSourceName()] = $channelSource;
             } else {
                 throw new ChannelSourceProviderException(
-                    "Channel source with name {$sourceProviderName} already exists."
+                    "Channel source with name {$channelSource->getSourceName()} already exists."
                 );
             }
         } catch (ChannelSourceProviderException $e) {

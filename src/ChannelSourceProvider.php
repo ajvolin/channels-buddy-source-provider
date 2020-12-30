@@ -2,34 +2,70 @@
 
 namespace ChannelsBuddy\SourceProvider;
 
+use ChannelsBuddy\SourceProvider\Contracts\ChannelSource;
+
 class ChannelSourceProvider
 {
-    private string $displayName;
-    private string $channelSourceClass;
+    /**
+     * @var string
+     */
+    private string $sourceName;
+    
+    /**
+     * @var string
+     */
+    private string $channelSourceServiceClass;
 
+    /**
+     * @var string
+     */
+    private string $displayName;
+
+    /**
+     * @var bool
+     */
     private bool $providesGuide;
+    
+    /**
+     * @var bool
+     */
     private bool $guideIsChunkable;
+    
+    /**
+     * @var ?int
+     */
     private ?int $maxGuideDuration;
+    
+    /**
+     * @var ?int
+     */
     private ?int $maxGuideChunkSize;
 
     /**
+     * @var ChannelSource
+     */
+    private ChannelSource $sourceService;
+
+    /**
      * ChannelSourceProvider constructor.
-     *
-     * @param string $channelSourceClass The name of the class implementing the ChannelSource contract
+     * @param string $sourceName The name of the source
+     * @param string $channelSourceServiceClass The name of the class implementing the ChannelSource contract
      * @param string $displayName The display name for the source
      * @param bool $providesGuide Indicates that the source provides a guide
      * @param bool $guideIsChunkable Indicates that the guide can be chunk loaded
      * @param ?int $maxGuideDuration The max duration of guide data that can be loaded, if chunkable
      * @param ?int $maxGuideChunkSize The max chunk size of guide data that can be loaded at one time, if chunkable
      */
-    public function __construct(string $channelSourceClass,
+    public function __construct(string $sourceName,
+                                string $channelSourceServiceClass,
                                 string $displayName,
                                 bool $providesGuide,
                                 bool $guideIsChunkable,
                                 ?int $maxGuideDuration = null,
                                 ?int $maxGuideChunkSize = null)
     {
-        $this->channelSourceClass = $channelSourceClass;
+        $this->sourceName = $sourceName;
+        $this->channelSourceServiceClass = $channelSourceServiceClass;
         $this->displayName = $displayName;
         $this->providesGuide = $providesGuide;
         $this->guideIsChunkable = $guideIsChunkable;
@@ -38,13 +74,27 @@ class ChannelSourceProvider
     }
 
     /**
-     * Returns the channel source class name
+     * Returns an instantiated ChannelSource
+     *
+     * @return ChannelSource
+     */
+    public function getChannelSourceService(): ChannelSource
+    {
+        if (!isset($this->sourceService)) {
+            $this->sourceService = new $this->channelSourceServiceClass;
+        }
+         
+        return $this->sourceService;
+    }
+
+    /**
+     * Returns the name for the channel source
      *
      * @return string
      */
-    public function getChannelSourceClass(): string
+    public function getSourceName(): string
     {
-        return $this->channelSourceClass;
+        return $this->sourceName;
     }
 
     /**
