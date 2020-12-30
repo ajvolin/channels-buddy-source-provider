@@ -45,16 +45,12 @@ class ChannelSourceProviders
     public function getChannelSourceProvider(
         string $sourceProviderName): ChannelSourceProvider
     {
-        try {
-            if (array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
-                return $this->channelSourceProviders[$sourceProviderName];
-            } else {
-                throw new ChannelSourceProviderException(
-                    "Channel source with name {$sourceProviderName} does not exist."
-                );
-            }
-        } catch (ChannelSourceProviderException $e) {
-            report($e);
+        if (array_key_exists($sourceProviderName, $this->channelSourceProviders)) {
+            return $this->channelSourceProviders[$sourceProviderName];
+        } else {
+            throw new ChannelSourceProviderException(
+                "Channel source with name {$sourceProviderName} does not exist."
+            );
         }
     }
     
