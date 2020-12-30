@@ -15,15 +15,8 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "ext-dom": "*",
-        "ext-libxml": "*",
-        "ext-xmlwriter": "*",
-        "ajvolin/xmltv": "^3.0.3",
-        "guzzlehttp/guzzle": "^7.2",
-        "halaxa/json-machine": "^0.5.0",
         "illuminate/support": "^8.0",
-        "nesbot/carbon": "^2.40.0",
-        "ramsey/uuid": "^4.1"
+        "nesbot/carbon": "^2.40.0"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +26,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ChannelsBuddy\\SourceProvider\\ServiceProviders\\ChannelsBuddySourceServiceProvider"
+                "ChannelsBuddy\\SourceProvider\\ChannelsBuddySourceServiceProvider"
             ]
         }
     },

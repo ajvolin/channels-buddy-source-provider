@@ -1,6 +1,6 @@
 <?php
 
-namespace ChannelsBuddy\SourceProvider\ServiceProviders;
+namespace ChannelsBuddy\SourceProvider;
 
 use ChannelsBuddy\SourceProvider\ChannelSourceProviders;
 use Illuminate\Support\ServiceProvider;
