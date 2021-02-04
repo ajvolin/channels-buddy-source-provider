@@ -26,6 +26,7 @@ class ChannelSourceProviders
         try {
             if (!array_key_exists($channelSource->getSourceName(), $this->channelSourceProviders)) {
                 $this->channelSourceProviders[$channelSource->getSourceName()] = $channelSource;
+                ksort($this->channelSourceProviders);
             } else {
                 throw new ChannelSourceProviderException(
                     "Channel source with name {$channelSource->getSourceName()} already exists."
