@@ -3,8 +3,10 @@
 namespace ChannelsBuddy\SourceProvider;
 
 use ChannelsBuddy\SourceProvider\Contracts\ChannelSource;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 
-class ChannelSourceProvider
+class ChannelSourceProvider implements Arrayable, Jsonable
 {
     /**
      * @var string
@@ -145,5 +147,33 @@ class ChannelSourceProvider
     public function getMaxGuideChunkSize(): ?int
     {
         return $this->maxGuideChunkSize;
+    }
+
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'source_name' => $this->sourceName,
+            'display_name' => $this->displayName,
+            'provides_guide' => $this->providesGuide,
+            'guide_is_chunkable'  => $this->guideIsChunkable,
+            'max_guide_duration' => $this->maxGuideDuration,
+            'max_guide_chunk_size' => $this->maxGuideChunkSize
+        ];
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int  $options
+     * @return string
+     */
+    public function toJson($options = 0): string
+    {
+        return json_encode($this->toArray(), $options);
     }
 }

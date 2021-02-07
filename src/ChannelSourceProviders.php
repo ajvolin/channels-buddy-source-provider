@@ -4,8 +4,10 @@ namespace ChannelsBuddy\SourceProvider;
 
 use ChannelsBuddy\SourceProvider\ChannelSourceProvider;
 use ChannelsBuddy\SourceProvider\Exceptions\ChannelSourceProviderException;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 
-class ChannelSourceProviders
+class ChannelSourceProviders implements Arrayable, Jsonable
 {
     /**
      * Array of registered channel source providers
@@ -63,5 +65,32 @@ class ChannelSourceProviders
     public function getChannelSourceProviders(): array
     {
         return $this->channelSourceProviders;
+    }
+
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $arr = ['providers' => []];
+
+        foreach ($this->channelSourceProviders as $k => $v) {
+            $arr['providers'][$k] = $v->toArray();
+        }
+
+        return $arr;
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int  $options
+     * @return string
+     */
+    public function toJson($options = 0): string
+    {
+        return json_encode($this->toArray(), $options);
     }
 }
