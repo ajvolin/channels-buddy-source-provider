@@ -2,9 +2,10 @@
 
 namespace ChannelsBuddy\SourceProvider\Models;
 
+use ChannelsBuddy\SourceProvider\Exceptions\AiringPropertyDoesNotExist;
+use ChannelsBuddy\SourceProvider\Models\BaseModel;
 use ChannelsBuddy\SourceProvider\Models\Rating;
 use ChannelsBuddy\SourceProvider\Models\Review;
-use ChannelsBuddy\SourceProvider\Exceptions\AiringPropertyDoesNotExist;
 use Carbon\Carbon;
 
 /**
@@ -13,7 +14,7 @@ use Carbon\Carbon;
  *
  */
 
-class Airing
+class Airing extends BaseModel
 {
     /**
      * @var string

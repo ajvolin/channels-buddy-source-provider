@@ -3,6 +3,7 @@
 namespace ChannelsBuddy\SourceProvider\Models;
 
 use ChannelsBuddy\SourceProvider\Exceptions\ChannelPropertyDoesNotExist;
+use ChannelsBuddy\SourceProvider\Models\BaseModel;
 
 /**
  * Class Channel
@@ -10,7 +11,7 @@ use ChannelsBuddy\SourceProvider\Exceptions\ChannelPropertyDoesNotExist;
  *
  */
 
-class Channel
+class Channel extends BaseModel
 {
     /**
      * @var string
@@ -25,7 +26,52 @@ class Channel
     /**
      * @var string
      */
+    public string $streamUrl;
+
+    /**
+     * @var string
+     */
+    public ?string $callSign;
+
+    /**
+     * @var string
+     */
+    public ?string $category;
+
+    /**
+     * @var string
+     */
+    public ?string $channelArt;
+
+    /**
+     * @var string
+     */
+    public ?string $description;
+
+    /**
+     * @var string
+     */
     public ?string $guideName;
+
+    /**
+     * @var bool
+     */
+    public ?bool $isHd;
+
+    /**
+     * @var bool
+     */
+    public ?bool $isSd;
+
+    /**
+     * @var bool
+     */
+    public ?bool $isUhd;
+
+    /**
+     * @var string
+     */
+    public ?string $logo;
 
     /**
      * @var string
@@ -35,7 +81,7 @@ class Channel
     /**
      * @var string
      */
-    public ?string $callSign;
+    public ?string $sortValue;
 
     /**
      * @var string
@@ -50,42 +96,12 @@ class Channel
     /**
      * @var string
      */
-    public ?string $description;
-
-    /**
-     * @var string
-     */
-    public ?string $logo;
-
-    /**
-     * @var string
-     */
-    public ?string $channelArt;
-
-    /**
-     * @var string
-     */
-    public ?string $category;
-
-    /**
-     * @var string
-     */
-    public ?string $videoCodec;
-
-    /**
-     * @var string
-     */
     public ?string $audioCodec;
 
     /**
      * @var string
      */
-    public string $streamUrl;
-
-    /**
-     * @var string
-     */
-    public ?string $sortValue;
+    public ?string $videoCodec;
 
     /**
      * Channel constructor.
@@ -144,6 +160,106 @@ class Channel
     }
 
     /**
+     * Get the channel stream URL.
+     *
+     * @return string
+     */
+    public function getStreamUrl(): string
+    {
+        return $this->streamUrl;
+    }
+
+    /**
+     * Set the channel stream URL.
+     *
+     * @param string $streamUrl
+     */
+    public function setStreamUrl(string $streamUrl): void
+    {
+        $this->streamUrl = $streamUrl;
+    }
+
+    /**
+     * Get the channel call sign.
+     *
+     * @return string
+     */
+    public function getCallSign(): ?string
+    {
+        return $this->callSign;
+    }
+
+    /**
+     * Set the channel call sign.
+     *
+     * @param string $callSign
+     */
+    public function setCallSign(?string $callSign): void
+    {
+        $this->callSign = $callSign;
+    }
+
+    /**
+     * Get the channel category.
+     *
+     * @return string
+     */
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set the channel category.
+     *
+     * @param string $category
+     */
+    public function setCategory(?string $category): void
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * Get the channel art.
+     *
+     * @return string
+     */
+    public function getChannelArt(): ?string
+    {
+        return $this->channelArt;
+    }
+
+    /**
+     * Set the channel art.
+     *
+     * @param string $channelArt
+     */
+    public function setChannelArt(?string $channelArt): void
+    {
+        $this->channelArt = $channelArt;
+    }
+
+    /**
+     * Get the channel description.
+     *
+     * @return string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the channel description.
+     *
+     * @param string $description
+     */
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
      * Get the channel guide name.
      *
      * @return string
@@ -161,6 +277,98 @@ class Channel
     public function setGuideName(?string $guideName): void
     {
         $this->guideName = $guideName;
+    }
+
+    /**
+     * Get the channel high definition indicator.
+     *
+     * @return bool
+     */
+    public function getIsHd(): ?bool
+    {
+        return $this->isHd;
+    }
+
+    /**
+     * Set the channel high definition indicator.
+     *
+     * @param bool $isHd
+     */
+    public function setIsHd(?bool $isHd): void
+    {
+        $this->isHd = $isHd;
+        if ($isHd) {
+            $this->isSd = false;
+            $this->isUhd = false;
+        }
+    }
+
+    /**
+     * Get the channel standard definition indicator.
+     *
+     * @return bool
+     */
+    public function getIsSd(): ?bool
+    {
+        return $this->isSd;
+    }
+
+    /**
+     * Set the channel standard definition indicator.
+     *
+     * @param bool $isSd
+     */
+    public function setIsSd(?bool $isSd): void
+    {
+        $this->isSd = $isSd;
+        if ($isSd) {
+            $this->isHd = false;
+            $this->isUhd = false;
+        }
+    }
+
+    /**
+     * Get the channel ultra high definition indicator.
+     *
+     * @return bool
+     */
+    public function getIsUhd(): ?bool
+    {
+        return $this->isUhd;
+    }
+
+    /**
+     * Set the channel ultra high definition indicator.
+     *
+     * @param bool $isUhd
+     */
+    public function setIsUhd(?bool $isUhd): void
+    {
+        $this->isUhd = $isUhd;
+        if ($isUhd) {
+            $this->isHd = false;
+            $this->isSd = false;
+        }
+    }
+
+    /**
+     * Get the channel logo.
+     *
+     * @return string
+     */
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    /**
+     * Set the channel logo.
+     *
+     * @param string $logo
+     */
+    public function setLogo(?string $logo): void
+    {
+        $this->logo = $logo;
     }
     
     /**
@@ -184,23 +392,23 @@ class Channel
     }
 
     /**
-     * Get the channel call sign.
+     * Get the channel sort value.
      *
      * @return string
      */
-    public function getCallSign(): ?string
+    public function getSortValue(): ?string
     {
-        return $this->callSign;
+        return $this->sortValue;
     }
 
     /**
-     * Set the channel call sign.
+     * Set the channel sort value.
      *
-     * @param string $callSign
+     * @param string $sortValue
      */
-    public function setCallSign(?string $callSign): void
+    public function setSortValue(?string $sortValue): void
     {
-        $this->callSign = $callSign;
+        $this->sortValue = $sortValue;
     }
 
     /**
@@ -244,83 +452,23 @@ class Channel
     }
 
     /**
-     * Get the channel description.
+     * Get the channel audio codec.
      *
      * @return string
      */
-    public function getDescription(): ?string
+    public function getAudioCodec(): ?string
     {
-        return $this->description;
+        return $this->audioCodec;
     }
 
     /**
-     * Set the channel description.
+     * Set the channel audio codec.
      *
-     * @param string $description
+     * @param string $audioCodec
      */
-    public function setDescription(?string $description): void
+    public function setAudioCodec(?string $audioCodec): void
     {
-        $this->description = $description;
-    }
-
-    /**
-     * Get the channel logo.
-     *
-     * @return string
-     */
-    public function getLogo(): ?string
-    {
-        return $this->logo;
-    }
-
-    /**
-     * Set the channel logo.
-     *
-     * @param string $logo
-     */
-    public function setLogo(?string $logo): void
-    {
-        $this->logo = $logo;
-    }
-
-    /**
-     * Get the channel art.
-     *
-     * @return string
-     */
-    public function getChannelArt(): ?string
-    {
-        return $this->channelArt;
-    }
-
-    /**
-     * Set the channel art.
-     *
-     * @param string $channelArt
-     */
-    public function setChannelArt(?string $channelArt): void
-    {
-        $this->channelArt = $channelArt;
-    }
-
-    /**
-     * Get the channel category.
-     *
-     * @return string
-     */
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    /**
-     * Set the channel category.
-     *
-     * @param string $category
-     */
-    public function setCategory(?string $category): void
-    {
-        $this->category = $category;
+        $this->audioCodec = $audioCodec;
     }
 
     /**
@@ -341,66 +489,5 @@ class Channel
     public function setVideoCodec(?string $videoCodec): void
     {
         $this->videoCodec = $videoCodec;
-    }
-
-    /**
-     * Get the channel audio codec.
-     *
-     * @return string
-     */
-    public function getAudioCodec(): ?string
-    {
-        return $this->audioCodec;
-    }
-
-    /**
-     * Set the channel audio codec.
-     *
-     * @param string $audioCodec
-     */
-    public function setAudioCodec(?string $audioCodec): void
-    {
-        $this->audioCodec = $audioCodec;
-    }
-
-
-    /**
-     * Get the channel stream URL.
-     *
-     * @return string
-     */
-    public function getStreamUrl(): string
-    {
-        return $this->streamUrl;
-    }
-
-    /**
-     * Set the channel stream URL.
-     *
-     * @param string $streamUrl
-     */
-    public function setStreamUrl(string $streamUrl): void
-    {
-        $this->streamUrl = $streamUrl;
-    }
-
-    /**
-     * Get the channel sort value.
-     *
-     * @return string
-     */
-    public function getSortValue(): ?string
-    {
-        return $this->sortValue;
-    }
-
-    /**
-     * Set the channel sort value.
-     *
-     * @param string $sortValue
-     */
-    public function setSortValue(?string $sortValue): void
-    {
-        $this->sortValue = $sortValue;
     }
 }

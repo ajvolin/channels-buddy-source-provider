@@ -2,6 +2,7 @@
 
 namespace ChannelsBuddy\SourceProvider\Models;
 
+use ChannelsBuddy\SourceProvider\Models\BaseModel;
 use Illuminate\Support\LazyCollection;
 
 /**
@@ -10,7 +11,7 @@ use Illuminate\Support\LazyCollection;
  *
  */
 
-class Channels
+class Channels extends BaseModel
 {
     /**
      * Yields a LazyCollection of Channel objects

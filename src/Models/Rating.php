@@ -2,13 +2,15 @@
 
 namespace ChannelsBuddy\SourceProvider\Models;
 
+use ChannelsBuddy\SourceProvider\Models\BaseModel;
+
 /**
  * Class Rating
  * @package ChannelsBuddy\SourceProvider
  *
  */
 
-class Rating
+class Rating extends BaseModel
 {
     /**
      * @var string

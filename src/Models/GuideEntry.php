@@ -2,6 +2,7 @@
 
 namespace ChannelsBuddy\SourceProvider\Models;
 
+use ChannelsBuddy\SourceProvider\Models\BaseModel;
 use ChannelsBuddy\SourceProvider\Models\Channel;
 use Illuminate\Support\LazyCollection;
 
@@ -11,7 +12,7 @@ use Illuminate\Support\LazyCollection;
  *
  */
 
-class GuideEntry
+class GuideEntry extends BaseModel
 {
     /**
      * @var Channel
